@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <h1>You are now Logged in !</h1>
+
+    <a href="{{ path('app_logout') }}">Log out</a>
+    
+{% endblock %}
