@@ -22,8 +22,9 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
+        $roles = ['ROLE_ADMIN', 'ROLE_PM', 'ROLE_MEMBER']; // v.1
 
-        $faker = Factory::create('en_US'); // polskie dane
+        $faker = Factory::create('en_US'); 
 
         for ($i = 0; $i < 3; $i++) {
 
@@ -32,6 +33,7 @@ class AppFixtures extends Fixture
             $user->setFirstName($faker->firstName());
             $user->setLastName($faker->lastName());
             $user->setEmail($faker->unique()->safeEmail());
+            $user->setRole($roles[$i]);
 
             // (!) ONLY TEMPORARY - safer method above - need to modify User Entity Class
             /*$user->setPassword(
@@ -48,7 +50,8 @@ class AppFixtures extends Fixture
             );*/
             $user->setCreatedAt(new \DateTimeImmutable());
 
-            $user->setIsApproved($faker->boolean(80)); // 80% true, 20% false
+            //$user->setIsApproved($faker->boolean(80)); // 80% true, 20% false
+            $user->setIsApproved(true);
 
             $manager->persist($user);
         }

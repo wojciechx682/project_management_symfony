@@ -39,6 +39,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     //private ?bool $isApproved = null;
     private ?bool $isApproved = false;
+
+    #[ORM\Column(length: 20)]
+    private ?string $role = null;
     //private bool $isApproved = false;
 
     public function getId(): ?int
@@ -154,11 +157,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        //return ['ROLE_USER']; // v.0
+        return [$this->role]; // v.1
     }
 
     public function eraseCredentials(): void
     {
         // Jeśli kiedyś będziesz przechowywał plainPassword — tu go czyścisz
+    }
+
+
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): static
+    {
+        $this->role = $role;
+
+        return $this;
     }
 }
