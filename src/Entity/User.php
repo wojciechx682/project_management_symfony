@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,9 +24,11 @@ class User
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
+    //private string $email = null;    
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
+    //private string $password = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -34,6 +39,7 @@ class User
     #[ORM\Column]
     //private ?bool $isApproved = null;
     private ?bool $isApproved = false;
+    //private bool $isApproved = false;
 
     public function getId(): ?int
     {
@@ -69,6 +75,11 @@ class User
         return $this->email;
     }
 
+    /*public function getEmail(): string
+    {
+        return $this->email;
+    }*/
+
     public function setEmail(string $email): static
     {
         $this->email = $email;
@@ -80,6 +91,11 @@ class User
     {
         return $this->password;
     }
+
+    /*public function getPassword(): string
+    {
+        return $this->password;
+    }*/
 
     public function setPassword(string $password): static
     {
@@ -117,10 +133,32 @@ class User
         return $this->isApproved;
     }
 
+    /*public function isApproved(): bool
+    {
+        return $this->isApproved;
+    }*/
+
     public function setIsApproved(bool $isApproved): static
     {
         $this->isApproved = $isApproved;
 
         return $this;
+    }
+
+
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+
+    public function getRoles(): array
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function eraseCredentials(): void
+    {
+        // Jeśli kiedyś będziesz przechowywał plainPassword — tu go czyścisz
     }
 }

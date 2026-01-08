@@ -33,14 +33,13 @@ class AppFixtures extends Fixture
             $user->setLastName($faker->lastName());
             $user->setEmail($faker->unique()->safeEmail());
 
-            /*$user->setPassword(
-                $this->passwordHasher->hashPassword($user, '12345')
-            );*/
-
             // (!) ONLY TEMPORARY - safer method above - need to modify User Entity Class
-            $user->setPassword(
+            /*$user->setPassword(
                 password_hash('12345', PASSWORD_DEFAULT)
-            );
+            );*/
+            $user->setPassword(
+                $this->passwordHasher->hashPassword($user, '12345')
+            );            
 
             /*$user->setCreatedAt(
                 \DateTimeImmutable::createFromMutable(
