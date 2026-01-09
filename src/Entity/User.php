@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -42,6 +44,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 20)]
     private ?string $role = null;
+
+    /**
+     * @var Collection<int, Team>
+     */
+    #[ORM\ManyToMany(targetEntity: Team::class, mappedBy: 'users')]
+    private Collection $teams;
+
+    public function __construct()
+    {
+        $this->teams = new ArrayCollection();
+    }
     //private bool $isApproved = false;
 
     public function getId(): ?int
@@ -176,6 +189,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRole(string $role): static
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Team>
+     */
+    public function getTeams(): Collection
+    {
+        return $this->teams;
+    }
+
+    public function addTeam(Team $team): static
+    {
+        if (!$this->teams->contains($team)) {
+            $this->teams->add($team);
+            $team->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeam(Team $team): static
+    {
+        if ($this->teams->removeElement($team)) {
+            $team->removeUser($this);
+        }
 
         return $this;
     }
