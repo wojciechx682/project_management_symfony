@@ -1,8 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/dashboard.html.twig' %}
 
-{% block title %}Admin{% endblock %}
+{% block navbar %}
+    {# block - nadpisuje navbar z dashboard.html.twig #}
+    {% include 'partials/navbar/_admin.html.twig' %}
+{% endblock %}
 
-{% block body %}
-  <h1>Admin dashboard</h1>
-  <a href="{{ path('app_logout') }}">Log out</a>
+{% block content %}
+    {# block - nadpisuje content z dashboard.html.twig #}
+    <h1>Admin Home</h1>
 {% endblock %}

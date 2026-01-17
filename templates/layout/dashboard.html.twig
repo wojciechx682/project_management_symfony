@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% include 'partials/_header.html.twig' %} {# wklejenie partiala - tutaj header wspólny dla każdej roli (!) #}
+
+    <div class="dashboard">
+
+        {% block navbar %}
+            {# domyślnie pusto — każda rola nadpisze navbar #}
+        {% endblock %}
+
+        <main class="content">
+            {% block content %}
+                {# każda rola nadpisze content (main) #}
+            {% endblock %}
+        </main>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+<header>
+    <div id="header">
+        <a href="#" class="profile-link">
+            {#<img src="../assets/img/user1.png" alt="User profile picture">#}
+            <div id="user-info">
+                {{ app.user.firstName }}
+                {{ app.user.lastName }} <br>
+                {% if is_granted('ROLE_ADMIN') %}
+                    Admin
+                {% elseif is_granted('ROLE_PM') %}
+                    Project Manager
+                {% else %}
+                    Team Member
+                {% endif %}
+            </div>
+        </a>
+        {#<input type="search" id="global-search" placeholder="Search projects, teams, users...">#}
+        {#<div id="search-results" class="hidden"></div> <!-- search-results to dropdown/lista, gdzie będziemy wrzucać wyniki. -->#}
+        <button class="">
+            <a href="{{ path('app_logout') }}">Log out</a>
+        </button>
+    </div>
+</header>
+
+
