@@ -12,7 +12,7 @@ final class ManagerDashboardController extends AbstractController
     #[Route('/manager', name: 'app_manager_dashboard')]
     public function index(): Response
     {
-        return $this->render('manager_dashboard/index.html.twig', [
+        return $this->render('manager/dashboard/index.html.twig', [
             'controller_name' => 'ManagerDashboardController',
         ]);
     }

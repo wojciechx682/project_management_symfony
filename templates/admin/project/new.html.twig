@@ -1,8 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/dashboard.html.twig' %}
 
 {% block title %}New Project{% endblock %}
 
-{% block body %}
+{% block navbar %}
+    {% include 'partials/navbar/_admin.html.twig' %}
+{% endblock %}
+
+{% block content %}
     <h1>Create new Project</h1>
 
     {{ include('admin/project/_form.html.twig') }}

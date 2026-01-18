@@ -1,8 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/dashboard.html.twig' %}
 
 {% block title %}Project index{% endblock %}
 
-{% block body %}
+{% block navbar %}
+    {% include 'partials/navbar/_admin.html.twig' %}
+{% endblock %}
+
+{% block content %}
     <h1>Project index</h1>
 
     <table class="table">
@@ -14,6 +18,7 @@
                 <th>StartDate</th>
                 <th>EndDate</th>
                 <th>Status</th>
+                <th>Team</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
                 <th>actions</th>
@@ -28,6 +33,7 @@
                 <td>{{ project.startDate ? project.startDate|date('Y-m-d') : '' }}</td>
                 <td>{{ project.endDate ? project.endDate|date('Y-m-d') : '' }}</td>
                 <td>{{ project.status }}</td>
+                <td>{{ project.team.name }}</td>
                 <td>{{ project.createdAt ? project.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ project.updatedAt ? project.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
@@ -43,5 +49,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('admin_projects_new') }}">Create new</a>
+    <a href="{{ path('admin_project_new') }}">Create new</a>
 {% endblock %}

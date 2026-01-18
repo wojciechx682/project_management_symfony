@@ -1,8 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/dashboard.html.twig' %}
 
 {% block title %}Project{% endblock %}
 
-{% block body %}
+{% block navbar %}
+    {% include 'partials/navbar/_admin.html.twig' %}
+{% endblock %}
+
+{% block content %}
     <h1>Project</h1>
 
     <table class="table">
@@ -30,6 +34,10 @@
             <tr>
                 <th>Status</th>
                 <td>{{ project.status }}</td>
+            </tr>
+            <tr>
+                <th>Team</th>
+                <td>{{ project.team.name }}</td>
             </tr>
             <tr>
                 <th>CreatedAt</th>

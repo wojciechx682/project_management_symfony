@@ -12,7 +12,7 @@ final class MemberDashboardController extends AbstractController
     #[Route('/member', name: 'app_member_dashboard')]
     public function index(): Response
     {
-        return $this->render('member_dashboard/index.html.twig', [
+        return $this->render('member/dashboard/index.html.twig', [
             'controller_name' => 'MemberDashboardController',
         ]);
     }
