@@ -50,6 +50,7 @@ class Project
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -86,7 +87,7 @@ class Project
         return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeImmutable $startDate): static
+    public function setStartDate(?\DateTimeImmutable $startDate): static
     {
         $this->startDate = $startDate;
 

@@ -1,4 +1,20 @@
+{#{{ form_start(form, { attr: { novalidate: 'novalidate' } }) }}#}
 {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+
+{#{{ form_start(form, { attr: { novalidate: 'novalidate' } }) }}
+
+{{ form_errors(form) }}
+
+{{ form_row(form.name) }}
+{{ form_row(form.description) }}
+{{ form_row(form.startDate) }}
+{{ form_row(form.endDate) }}
+{{ form_row(form.status) }}
+{{ form_row(form.team) }}
+
+<button class="btn">Save</button>
+
+{{ form_end(form) }}#}

@@ -11,6 +11,15 @@
         {% endblock %}
 
         <main class="content">
+
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
             {% block content %}
                 {# każda rola nadpisze content (main) #}
             {% endblock %}

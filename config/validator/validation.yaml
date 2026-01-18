@@ -1,0 +1,26 @@
+App\Entity\Project:
+    properties:
+        name:
+            - NotBlank:
+                  message: "Project name is required"
+
+        description:
+            - NotBlank:
+                  message: "Project description is required"
+
+        startDate:
+            - NotNull:
+                  message: "Start date is required"
+
+        endDate:
+            - GreaterThanOrEqual:
+                  propertyPath: startDate
+                  message: "The end date cannot be earlier than the start date"
+
+        status:
+            - NotBlank:
+                  message: "Project status is required"
+
+        team:
+            - NotNull:
+                  message: "You have to choose a team"

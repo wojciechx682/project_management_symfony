@@ -54,8 +54,11 @@ final class AdminProjectController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager->persist($project);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Project created successfully');
 
             return $this->redirectToRoute('admin_projects_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -83,6 +86,8 @@ final class AdminProjectController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Project updated successfully');
+
             return $this->redirectToRoute('admin_projects_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -98,6 +103,7 @@ final class AdminProjectController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($project);
             $entityManager->flush();
+            $this->addFlash('success', 'Project deleted successfully');
         }
 
         return $this->redirectToRoute('admin_projects_index', [], Response::HTTP_SEE_OTHER);
