@@ -63,11 +63,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'user')]
     private Collection $comments;
 
+    /**
+     * @var Collection<int, Team>
+     */
+    #[ORM\OneToMany(targetEntity: Team::class, mappedBy: 'leader')]
+    private Collection $ledTeams;
+
     public function __construct()
     {
         $this->teams = new ArrayCollection();
         $this->tasks = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->ledTeams = new ArrayCollection();
     }
     //private bool $isApproved = false;
 
@@ -288,6 +295,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Team>
+     */
+    public function getLedTeams(): Collection
+    {
+        return $this->ledTeams;
+    }
+
+    public function addLedTeam(Team $ledTeam): static
+    {
+        if (!$this->ledTeams->contains($ledTeam)) {
+            $this->ledTeams->add($ledTeam);
+            $ledTeam->setLeader($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLedTeam(Team $ledTeam): static
+    {
+        if ($this->ledTeams->removeElement($ledTeam)) {
+            // set the owning side to null (unless already changed)
+            if ($ledTeam->getLeader() === $this) {
+                $ledTeam->setLeader(null);
             }
         }
 

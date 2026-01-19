@@ -33,6 +33,10 @@ class Team
     #[ORM\OneToMany(targetEntity: Project::class, mappedBy: 'team')]
     private Collection $projects;
 
+    #[ORM\ManyToOne(inversedBy: 'ledTeams')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $leader = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -118,6 +122,18 @@ class Team
                 $project->setTeam(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLeader(): ?User
+    {
+        return $this->leader;
+    }
+
+    public function setLeader(?User $leader): static
+    {
+        $this->leader = $leader;
 
         return $this;
     }

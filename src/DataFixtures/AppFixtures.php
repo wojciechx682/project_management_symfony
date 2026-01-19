@@ -91,6 +91,8 @@ class AppFixtures extends Fixture
         $teams[0]->addUser($users[1]); // PM
         $teams[0]->addUser($users[2]); // Member
 
+        $teams[0]->setLeader($users[1]); // PM jako lider
+
         $project = new Project();
 
         $project->setName('Project Management App');
