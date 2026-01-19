@@ -1,0 +1,17 @@
+{% extends 'layout/dashboard.html.twig' %}
+
+{% block title %}Edit Team{% endblock %}
+
+{% block navbar %}
+    {% include 'partials/navbar/_admin.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <h1>Edit Team</h1>
+
+    {{ include('admin/team/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_admin_team_index') }}">back to list</a>
+
+    {{ include('admin/team/_delete_form.html.twig') }}
+{% endblock %}

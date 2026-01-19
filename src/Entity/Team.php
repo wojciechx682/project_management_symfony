@@ -41,6 +41,7 @@ class Team
     {
         $this->users = new ArrayCollection();
         $this->projects = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
