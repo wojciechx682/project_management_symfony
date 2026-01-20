@@ -1,0 +1,15 @@
+{% extends 'layout/dashboard.html.twig' %}
+
+{% block title %}New Project{% endblock %}
+
+{% block navbar %}
+    {% include 'partials/navbar/_manager.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <h1>Create new Project</h1>
+
+    {{ include('manager/project/_form.html.twig') }}
+
+    <a href="{{ path('manager_projects_index') }}">back to list</a>
+{% endblock %}

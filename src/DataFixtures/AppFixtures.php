@@ -53,10 +53,10 @@ class AppFixtures extends Fixture
         $manager->flush();    */
 
         $users = [];
-        $roles = ['ROLE_ADMIN', 'ROLE_PM', 'ROLE_MEMBER']; // v.1
+        $roles = ['ROLE_ADMIN', 'ROLE_PM', 'ROLE_MEMBER', 'ROLE_PM']; // v.1
         $faker = Factory::create('en_US');
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $user = new User();
 
             $user->setFirstName($faker->firstName());
@@ -77,10 +77,10 @@ class AppFixtures extends Fixture
 
         $teams = [];
 
-        for ($i = 0; $i < 1; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $team = new Team();
-            //$team->setName('Team ' . ($i + 1));
-            $team->setName('PM App Team');
+            $team->setName('Team ' . ($i + 1));
+            //$team->setName('PM App Team');
             $team->setCreatedAt(new \DateTimeImmutable());
 
             $manager->persist($team);
@@ -90,8 +90,12 @@ class AppFixtures extends Fixture
         $teams[0]->addUser($users[0]); // Admin
         $teams[0]->addUser($users[1]); // PM
         $teams[0]->addUser($users[2]); // Member
-
         $teams[0]->setLeader($users[1]); // PM jako lider
+
+        $teams[1]->addUser($users[3]); // PM
+        $teams[1]->addUser($users[2]); // Member
+        $teams[1]->setLeader($users[3]); // PM jako lider
+
 
         $project = new Project();
 
