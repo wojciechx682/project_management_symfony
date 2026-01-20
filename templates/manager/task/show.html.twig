@@ -1,0 +1,54 @@
+{% extends 'layout/dashboard.html.twig' %}
+
+{% block title %}Task{% endblock %}
+
+{% block navbar %}
+    {% include 'partials/navbar/_manager.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <h1>Task</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ task.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ task.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ task.description }}</td>
+            </tr>
+            <tr>
+                <th>Priority</th>
+                <td>{{ task.priority }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ task.status }}</td>
+            </tr>
+            <tr>
+                <th>DueDate</th>
+                <td>{{ task.dueDate ? task.dueDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ task.updatedAt ? task.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_manager_task_index') }}">back to list</a>
+
+    <a href="{{ path('app_manager_task_edit', {'id': task.id}) }}">edit</a>
+
+    {{ include('manager/task/_delete_form.html.twig') }}
+{% endblock %}
