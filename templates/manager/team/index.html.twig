@@ -1,20 +1,39 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/dashboard.html.twig' %}
 
-{% block title %}Hello ManagerTeamController!{% endblock %}
+{% block title %}Team index{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block navbar %}
+    {% include 'partials/navbar/_manager.html.twig' %}
+{% endblock %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% block content %}
+    <h1>Team index</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/projects/project_management/src/Controller/ManagerTeamController.php</code></li>
-        <li>Your template at <code>C:/projects/project_management/templates/manager_team/index.html.twig</code></li>
-    </ul>
-</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for team in teams %}
+            <tr>
+                <td>{{ team.id }}</td>
+                <td>{{ team.name }}</td>
+                <td>{{ team.createdAt ? team.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('manager_team_controller_show', {'id': team.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}

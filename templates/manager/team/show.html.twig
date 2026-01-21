@@ -1,0 +1,31 @@
+{% extends 'layout/dashboard.html.twig' %}
+
+{% block title %}Team{% endblock %}
+
+{% block navbar %}
+    {% include 'partials/navbar/_manager.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <h1>Team</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ team.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ team.name }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ team.createdAt ? team.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('manager_team_controller') }}">back to list</a>
+
+{% endblock %}

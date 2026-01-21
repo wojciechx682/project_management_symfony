@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Team;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,6 +15,27 @@ class TeamRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Team::class);
+    }
+
+    public function findForLeader(User $leader): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.leader = :leader')
+            ->setParameter('leader', $leader)
+            ->orderBy('t.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findOneForLeader(int $id, User $leader): ?Team
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.id = :id')
+            ->andWhere('t.leader = :leader')
+            ->setParameter('id', $id)
+            ->setParameter('leader', $leader)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     //    /**
