@@ -20,6 +20,9 @@ App\Entity\Project:
         status:
             - NotBlank:
                   message: "Project status is required"
+            - Choice:
+                  choices: [ 'Planned', 'In Progress', 'Completed', 'Cancelled' ]
+                  message: 'Invalid status'
 
         team:
             - NotNull:

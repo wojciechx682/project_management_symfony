@@ -6,6 +6,7 @@ use App\Entity\Project;
 use App\Entity\Team;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,16 +23,24 @@ class Project1Type extends AbstractType
             ->add('endDate', null, [
                 'widget' => 'single_text',
             ])
-            ->add('status')
-            ->add('createdAt', null, [
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'Planned' => 'Planned',
+                    'In Progress' => 'In Progress',
+                    'Completed' => 'Completed',
+                    'Cancelled' => 'Cancelled',
+                ],
+                'placeholder' => 'Choose status',
+            ])
+            /*->add('createdAt', null, [
                 'widget' => 'single_text',
             ])
             ->add('updatedAt', null, [
                 'widget' => 'single_text',
-            ])
+            ])*/
             ->add('team', EntityType::class, [
                 'class' => Team::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
         ;
     }
