@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Form\Project1Type;
 use App\Repository\ProjectRepository;
+use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +26,7 @@ final class ManagerProjectController extends AbstractController
         if (!$user) {
             throw $this->createAccessDeniedException();
         }
-        // Wersja A:
+
         $projects = $projectRepository->findForLeader($user);
 
         return $this->render('manager/project/index.html.twig', [
@@ -56,21 +57,24 @@ final class ManagerProjectController extends AbstractController
     }
 
     #[Route('/{id}', name: 'manager_project_show', methods: ['GET'])]
-    public function show(int $id, ProjectRepository $projectRepository): Response
+    public function show(int $id, ProjectRepository $projectRepository, TaskRepository $taskRepository): Response
     {
         $user = $this->getUser();
         if (!$user) {
             throw $this->createAccessDeniedException();
         }
-
         $project = $projectRepository->findOneForLeader($id, $user);
-
         if (!$project) {
             throw $this->createNotFoundException(); // 404
         }
 
+
+        $tasks = $taskRepository->findForLeaderAndProject($user, $id);
+
+
         return $this->render('manager/project/show.html.twig', [
             'project' => $project,
+            'tasks' => $tasks,
         ]);
     }
 

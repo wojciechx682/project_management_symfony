@@ -17,8 +17,19 @@ final class ManagerTaskController extends AbstractController
     #[Route(name: 'app_manager_task_index', methods: ['GET'])]
     public function index(TaskRepository $taskRepository): Response
     {
-        return $this->render('manager/task/index.html.twig', [
+        /*return $this->render('manager/task/index.html.twig', [
             'tasks' => $taskRepository->findAll(),
+        ]);*/
+
+        $user = $this->getUser();
+        if (!$user) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $tasks = $taskRepository->findForLeader($user);
+
+        return $this->render('manager/task/index.html.twig', [
+            'tasks' => $tasks,
         ]);
     }
 
