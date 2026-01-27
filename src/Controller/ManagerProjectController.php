@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\Task;
 use App\Form\Project1Type;
 use App\Repository\ProjectRepository;
 use App\Repository\TaskRepository;
@@ -153,4 +154,6 @@ final class ManagerProjectController extends AbstractController
 
         return $this->redirectToRoute('manager_projects_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }

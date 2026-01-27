@@ -83,7 +83,7 @@
                 <td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ task.updatedAt ? task.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_manager_task_show', {'id': task.id}) }}">show</a>
+                    <a href="{{ path('manager_project_task_show', {'taskId': task.id, 'projectId': project.id}) }}">show</a>
                     <a href="{{ path('app_manager_task_edit', {'id': task.id}) }}">edit</a>
                 </td>
             </tr>
@@ -95,6 +95,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_manager_task_new') }}">Create new</a>
+    <a href="{{ path('manager_project_task_new', {'projectId': project.id}) }}">Create new</a>
 
 {% endblock %}

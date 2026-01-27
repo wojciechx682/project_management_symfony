@@ -1,0 +1,15 @@
+{% extends 'layout/dashboard.html.twig' %}
+
+{% block title %}New Task{% endblock %}
+
+{% block navbar %}
+    {% include 'partials/navbar/_admin.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <h1>Create new Task</h1>
+
+    {{ include('admin/task/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_task_index') }}">back to list</a>
+{% endblock %}
